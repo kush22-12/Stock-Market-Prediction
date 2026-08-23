@@ -1,0 +1,25 @@
+digraph model_flow {
+	rankdir=LR size="10,3"
+	A [label="Raw OHLCV
+(Open, High, Low, Close, Volume)" color=lightblue fontsize=12 shape=box style="rounded,filled"]
+	B [label="Feature Engineering
+(Indicators: EMA, VWAP,
+Supertrend, PSAR, Ichimoku...)" color=lightblue fontsize=12 shape=box style="rounded,filled"]
+	C [label="Sliding Window
+(Past 30 candles)" color=lightblue fontsize=12 shape=box style="rounded,filled"]
+	D [label="Standard Scaler
+(fit only on train)" color=lightblue fontsize=12 shape=box style="rounded,filled"]
+	E [label="Tensor Shape
+30 × 21 features" color=lightblue fontsize=12 shape=box style="rounded,filled"]
+	F [label="Hybrid LSTM + GRU
+2 layers each, 128 units
+Dropout = 0.2" color=lightblue fontsize=12 shape=box style="rounded,filled"]
+	G [label="Prediction
+Next 4 Close Prices" color=lightblue fontsize=12 shape=box style="rounded,filled"]
+	A -> B
+	B -> C
+	C -> D
+	D -> E
+	E -> F
+	F -> G
+}
